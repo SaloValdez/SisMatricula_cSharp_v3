@@ -1,0 +1,40 @@
+void setup() {
+  // inicializacion de comunicacion serial:
+  Serial.begin(9600);
+   // inicializa los pines de los LEDs:
+      for (int thisPin = 2; thisPin < 7; thisPin++) {
+        pinMode(thisPin, OUTPUT);
+      }
+}
+void loop() {
+  // lectura del sensor
+  if (Serial.available() > 0) {   // sie el serial esta  dsiponible   y los valores  mayores  a 0 
+    int inByte = Serial.read();   //leer  lo que se intrudce por el serial
+              switch (inByte) {   //  verificar los casos introducidos en inByte
+              case 'r':    
+                digitalWrite(2, HIGH);
+                break;
+              case 'a':    
+                digitalWrite(3, HIGH);
+                break;
+              case 'v':    
+                digitalWrite(4, HIGH);
+                break;
+              case 'R':    
+                digitalWrite(2, LOW);
+                break;
+              case 'A':    
+                digitalWrite(3, LOW);
+                break;
+                 case 'V':    
+                digitalWrite(4, LOW);
+                break;
+
+              default:
+                // apaga los LEDs:
+                for (int thisPin = 2; thisPin < 7; thisPin++) {
+                  digitalWrite(thisPin, LOW);
+                }
+    }
+  }
+}
